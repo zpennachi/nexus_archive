@@ -133,9 +133,6 @@
           <h1 class="text-3xl sm:text-4xl font-bold text-[#111827] font-serif-title tracking-tight">
             Map & Manuscript Digital Archive
           </h1>
-          <p class="text-xs sm:text-sm text-[#6E3F18] font-serif-title font-semibold mt-0.5 tracking-wide" id="stats-banner">
-            Curated historical cartography and manuscript records
-          </p>
         </div>
 
         <!-- Right: Search Input -->
@@ -168,7 +165,7 @@
     
     <!-- Left Column: Collections Sidebar -->
     <aside class="w-full md:w-72 shrink-0">
-      <div class="bg-white border border-[#DDD5C9] rounded-sm p-3.5 sticky top-36 max-h-[calc(100vh-11rem)] overflow-y-auto custom-scroll shadow-xs">
+      <div class="bg-white border border-[#DDD5C9] rounded-sm p-3.5 sticky top-28 max-h-[calc(100vh-9rem)] overflow-y-auto custom-scroll shadow-xs">
         
         <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-[#EFEAE2]">
           <h2 class="text-xs font-bold text-[#6E3F18] font-serif-title uppercase tracking-wider">
@@ -189,7 +186,7 @@
       <!-- Catalog Status & Sort Bar -->
       <div class="bg-white border border-[#DDD5C9] rounded-sm px-4 py-2.5 mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs shadow-2xs">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="font-serif-title text-sm font-bold text-[#111827]">Showing <span id="filtered-count" class="font-bold text-[#6E3F18]">0</span> artifacts</span>
+          <span class="font-serif-title text-sm font-bold text-[#111827]">Showing <span id="filtered-count" class="font-bold text-[#6E3F18]">0</span> items</span>
           <span id="active-filter-badge" class="hidden px-2.5 py-0.5 bg-[#F8F6F0] text-[#6E3F18] border border-[#DDD5C9] text-[11px] font-serif-title font-bold uppercase tracking-wider rounded-xs"></span>
         </div>
         
@@ -216,7 +213,7 @@
     </main>
   </div>
 
-  <!-- Streamlined Museum Dossier Modal (Pure Editorial Focus) -->
+  <!-- Streamlined Museum Dossier Modal -->
   <div id="detail-modal" class="fixed inset-0 bg-[#0F0E0D]/85 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-6 hidden">
     <div id="detail-modal-box" class="bg-white border border-[#DDD5C9] max-w-5xl w-full max-h-[92vh] flex flex-col md:flex-row overflow-hidden shadow-2xl rounded-sm">
       
@@ -366,8 +363,6 @@
                 item_count: colItemCounts[c.name]
               }));
 
-            document.getElementById('stats-banner').textContent = 
-              `${allItems.length.toLocaleString()} curated artifacts across ${allCollections.length} collections`;
             return true;
           }
         }
@@ -386,16 +381,13 @@
           ]);
           allItems = (await itemsRes.json()).slice(0, 1000);
           allCollections = await colsRes.json();
-
-          document.getElementById('stats-banner').textContent = 
-            `${allItems.length.toLocaleString()} catalogued artifacts across ${allCollections.length} collections (Local Cache)`;
         }
 
         renderCollectionList();
         applyFilters();
         setupEvents();
       } catch (err) {
-        document.getElementById('stats-banner').textContent = 'Error loading archive: ' + err.message;
+        console.error('Error loading archive:', err);
       }
     }
 
@@ -491,7 +483,7 @@
       if (pageItems.length === 0) {
         grid.innerHTML = `
           <div class="col-span-full py-20 text-center text-[#111827] font-serif-title">
-            <p class="text-base font-bold">No records match the active filter or search criteria.</p>
+            <p class="text-base font-bold">No items match the active filter or search criteria.</p>
           </div>
         `;
         return;
