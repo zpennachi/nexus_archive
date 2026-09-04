@@ -134,7 +134,7 @@
             Map & Manuscript Digital Archive
           </h1>
           <p class="text-xs sm:text-sm text-[#6E3F18] font-serif-title font-semibold mt-0.5 tracking-wide" id="stats-banner">
-            Connecting to Supabase cloud archive...
+            Connecting to cloud library...
           </p>
         </div>
 
@@ -188,7 +188,7 @@
         </div>
         
         <ul class="space-y-1" id="collections-list">
-          <!-- Populated from Supabase -->
+          <!-- Dynamically populated -->
         </ul>
       </div>
     </aside>
@@ -215,7 +215,7 @@
 
       <!-- Placards Grid -->
       <div id="items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Rendered from Supabase -->
+        <!-- Rendered cards -->
       </div>
 
       <!-- Pagination -->
@@ -345,12 +345,12 @@
         ]);
 
         if (colsRes.ok && artsRes.ok) {
-          allCollections = await colsRes.json();
+          const rawCollections = await colsRes.json();
           const dbArtifacts = await artsRes.json();
           
           if (dbArtifacts.length > 0) {
+            // Only keep items that have valid preview images uploaded
             allItems = dbArtifacts.map(a => {
-              // Extract accurate preview filename (e.g. Africa__DSC00033.webp)
               const previewFile = a.preview_url ? a.preview_url.split('/').pop() : a.filename;
               const storageUrl = `${url}/storage/v1/object/public/previews/${previewFile}`;
               
@@ -375,8 +375,22 @@
               };
             });
 
+            // Dynamically recalculate collection counts based on the 1,000 active assets
+            const colItemCounts = {};
+            allItems.forEach(i => {
+              colItemCounts[i.collection] = (colItemCounts[i.collection] || 0) + 1;
+            });
+
+            // Filter out empty collections from the sidebar
+            allCollections = rawCollections
+              .filter(c => (colItemCounts[c.name] || 0) > 0)
+              .map(c => ({
+                ...c,
+                item_count: colItemCounts[c.name]
+              }));
+
             document.getElementById('stats-banner').textContent = 
-              `${allItems.length.toLocaleString()} artifacts live from Supabase PostgreSQL (${allCollections.length} collections)`;
+              `${allItems.length.toLocaleString()} artifacts live from Supabase PostgreSQL (${allCollections.length} active collections)`;
             return true;
           }
         }
@@ -389,12 +403,11 @@
         const connected = await fetchFromSupabase();
         
         if (!connected) {
-          // Fallback to local JSON files
           const [itemsRes, colsRes] = await Promise.all([
             fetch('catalog.json'),
             fetch('collections.json')
           ]);
-          allItems = await itemsRes.json();
+          allItems = (await itemsRes.json()).slice(0, 1000);
           allCollections = await colsRes.json();
 
           document.getElementById('stats-banner').textContent = 
@@ -521,8 +534,8 @@
         const hasAI = item.ai_content && (item.ai_content.transcribed_text || item.ai_content.english_translation);
 
         card.innerHTML = `
-          <div class="aspect-[4/3] bg-[#F8F6F0] overflow-hidden relative flex items-center justify-center border-b border-[#EFEAE2]">
-            ${thumbSrc ? `<img src="${thumbSrc}" alt="${item.title || item.filename}" loading="lazy" class="w-full h-full object-cover group-hover:scale-103 transition duration-500 ease-out" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\'><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'20\\'>📄</text></svg>'">` : '<div class="w-full h-full flex items-center justify-center text-[#111827] text-xl font-sans">📄</div>'}
+          <div class="aspect-[4/3] bg-[#EFEAE2] overflow-hidden relative flex items-center justify-center border-b border-[#EFEAE2]">
+            <img src="${thumbSrc}" alt="${item.title || item.filename}" loading="lazy" class="w-full h-full object-cover group-hover:scale-103 transition duration-500 ease-out bg-[#F8F6F0]">
             
             ${hasAI ? `<div class="absolute top-2 right-2"><span class="px-1.5 py-0.5 bg-emerald-950 text-white text-[9px] font-sans font-bold shadow-xs flex items-center gap-1 rounded-xs"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>AI ✓</span></div>` : ''}
           </div>
