@@ -41,12 +41,11 @@
     }
   </script>
 
-  <!-- Supabase Client Config -->
+  <!-- Live Supabase Client Config -->
   <script>
-    // Set your Supabase credentials here for direct cloud fetching
     window.SUPABASE_CONFIG = {
-      url: localStorage.getItem('SUPABASE_URL') || '',
-      anonKey: localStorage.getItem('SUPABASE_ANON_KEY') || ''
+      url: 'https://apdeizexojclvezoesoo.supabase.co',
+      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwZGVpemV4b2pjbHZlem9lc29vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1MzEyNDEsImV4cCI6MjEwNDEwNzI0MX0.UZFbU_BHr1J0JCCkutLMHsomB1nb6CiX9fdvogVHLKg'
     };
   </script>
 
@@ -136,8 +135,8 @@
           </p>
         </div>
 
-        <!-- Right: Search, AI Filter & Supabase Connection -->
-        <div class="flex items-center gap-2.5 w-full lg:w-auto flex-wrap sm:flex-nowrap">
+        <!-- Right: Search & AI Filter -->
+        <div class="flex items-center gap-2.5 w-full lg:w-auto">
           
           <!-- Global Search Input -->
           <div class="relative flex-1 lg:w-72">
@@ -150,14 +149,9 @@
           </div>
 
           <!-- AI Filter Toggle -->
-          <button id="ai-only-btn" class="shrink-0 px-3 py-2 text-xs font-bold rounded-sm border border-[#C5BCB2] bg-white text-[#111827] hover:bg-[#F3EFE9] hover:border-[#6E3F18] active:scale-98 transition flex items-center gap-1.5 font-sans cursor-pointer shadow-2xs">
+          <button id="ai-only-btn" class="shrink-0 px-3.5 py-2 text-xs font-bold rounded-sm border border-[#C5BCB2] bg-white text-[#111827] hover:bg-[#F3EFE9] hover:border-[#6E3F18] active:scale-98 transition flex items-center gap-1.5 font-sans cursor-pointer shadow-2xs">
             <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
             <span>Enriched (<span id="ai-count">0</span>)</span>
-          </button>
-
-          <!-- Supabase Config Button -->
-          <button id="config-btn" title="Configure Supabase Cloud URL & Key" class="shrink-0 px-2.5 py-2 text-xs font-bold rounded-sm border border-[#C5BCB2] bg-white text-[#111827] hover:bg-[#F3EFE9] active:scale-98 transition font-sans cursor-pointer shadow-2xs flex items-center gap-1">
-            <span>⚙</span>
           </button>
 
         </div>
@@ -346,34 +340,35 @@
           allCollections = await colsRes.json();
           const dbArtifacts = await artsRes.json();
           
-          // Map database structure to UI item structure
-          allItems = dbArtifacts.map(a => ({
-            id: a.id,
-            filename: a.filename,
-            collection: a.collection,
-            category: a.category,
-            title: a.title,
-            date_depicted: a.date_depicted,
-            format: a.format,
-            file_size: a.file_size,
-            preview_url: a.preview_url.startsWith('http') 
-              ? a.preview_url 
-              : `${url}/storage/v1/object/public/previews/${a.filename}`,
-            thumbnail_url: a.preview_url.startsWith('http') 
-              ? a.preview_url 
-              : `${url}/storage/v1/object/public/previews/${a.filename}`,
-            ai_content: a.ai_content || {
-              document_type: a.title,
-              language: a.language,
-              key_entities: a.entities || [],
-              transcribed_text: a.script_text || '',
-              english_translation: a.overview || ''
-            }
-          }));
+          if (dbArtifacts.length > 0) {
+            allItems = dbArtifacts.map(a => ({
+              id: a.id,
+              filename: a.filename,
+              collection: a.collection,
+              category: a.category,
+              title: a.title,
+              date_depicted: a.date_depicted,
+              format: a.format,
+              file_size: a.file_size,
+              preview_url: a.preview_url.startsWith('http') 
+                ? a.preview_url 
+                : `${url}/storage/v1/object/public/previews/${a.filename}`,
+              thumbnail_url: a.preview_url.startsWith('http') 
+                ? a.preview_url 
+                : `${url}/storage/v1/object/public/previews/${a.filename}`,
+              ai_content: a.ai_content || {
+                document_type: a.title,
+                language: a.language,
+                key_entities: a.entities || [],
+                transcribed_text: a.script_text || '',
+                english_translation: a.overview || ''
+              }
+            }));
 
-          document.getElementById('stats-banner').textContent = 
-            `${allItems.length.toLocaleString()} artifacts live from Supabase PostgreSQL (${allCollections.length} collections)`;
-          return true;
+            document.getElementById('stats-banner').textContent = 
+              `${allItems.length.toLocaleString()} artifacts live from Supabase PostgreSQL (${allCollections.length} collections)`;
+            return true;
+          }
         }
       }
       return false;
@@ -384,7 +379,7 @@
         const connected = await fetchFromSupabase();
         
         if (!connected) {
-          // Fallback to local JSON files if Supabase is not configured yet
+          // Fallback to local JSON files
           const [itemsRes, colsRes] = await Promise.all([
             fetch('catalog.json'),
             fetch('collections.json')
@@ -684,25 +679,6 @@
         aiBtn.classList.add('bg-white', 'text-[#111827]', 'hover:bg-[#F3EFE9]', 'border-[#C5BCB2]');
         currentPage = 1;
         applyFilters();
-      });
-
-      // Supabase Settings Modal Prompt
-      document.getElementById('config-btn').addEventListener('click', () => {
-        const currentUrl = localStorage.getItem('SUPABASE_URL') || '';
-        const currentKey = localStorage.getItem('SUPABASE_ANON_KEY') || '';
-        
-        const newUrl = prompt('Enter your Supabase Project URL (e.g. https://xyz.supabase.co):', currentUrl);
-        if (newUrl !== null) {
-          const newKey = prompt('Enter your Supabase Anon Public Key:', currentKey);
-          if (newKey !== null) {
-            localStorage.setItem('SUPABASE_URL', newUrl.trim());
-            localStorage.setItem('SUPABASE_ANON_KEY', newKey.trim());
-            window.SUPABASE_CONFIG.url = newUrl.trim();
-            window.SUPABASE_CONFIG.anonKey = newKey.trim();
-            alert('Supabase credentials saved! Reloading live from Supabase...');
-            location.reload();
-          }
-        }
       });
 
       const searchInput = document.getElementById('search-input');
