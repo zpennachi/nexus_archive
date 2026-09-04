@@ -350,8 +350,10 @@
           
           if (dbArtifacts.length > 0) {
             allItems = dbArtifacts.map(a => {
-              // Construct public Supabase Storage CDN URL for image
-              const storageUrl = `${url}/storage/v1/object/public/previews/${a.filename}`;
+              // Extract accurate preview filename (e.g. Africa__DSC00033.webp)
+              const previewFile = a.preview_url ? a.preview_url.split('/').pop() : a.filename;
+              const storageUrl = `${url}/storage/v1/object/public/previews/${previewFile}`;
+              
               return {
                 id: a.id,
                 filename: a.filename,
@@ -361,8 +363,8 @@
                 date_depicted: a.date_depicted,
                 format: a.format,
                 file_size: a.file_size,
-                preview_url: a.preview_url && a.preview_url.startsWith('http') ? a.preview_url : storageUrl,
-                thumbnail_url: a.thumbnail_url && a.thumbnail_url.startsWith('http') ? a.thumbnail_url : storageUrl,
+                preview_url: storageUrl,
+                thumbnail_url: storageUrl,
                 ai_content: a.ai_content || {
                   document_type: a.title,
                   language: a.language,
