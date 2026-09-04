@@ -126,7 +126,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
       <!-- Primary Masthead Row -->
-      <div class="py-4 sm:py-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-[#EFEAE2]">
+      <div class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#EFEAE2]">
         
         <!-- Left: Brand / Title -->
         <div>
@@ -134,30 +134,20 @@
             Map & Manuscript Digital Archive
           </h1>
           <p class="text-xs sm:text-sm text-[#6E3F18] font-serif-title font-semibold mt-0.5 tracking-wide" id="stats-banner">
-            Connecting to cloud library...
+            Curated historical cartography and manuscript records
           </p>
         </div>
 
-        <!-- Right: Search & AI Filter -->
-        <div class="flex items-center gap-2.5 w-full lg:w-auto">
-          
-          <!-- Global Search Input -->
-          <div class="relative flex-1 lg:w-72">
-            <input type="text" id="search-input" placeholder="Search title, place, language, text..." 
-              class="w-full bg-white border border-[#C5BCB2] rounded-sm pl-9 pr-8 py-2 text-xs font-semibold text-[#111827] placeholder-[#6B7280] focus:outline-none focus:ring-1 focus:ring-[#6E3F18] focus:border-[#6E3F18] transition font-sans shadow-2xs">
-            <span class="absolute left-3 top-2.5 text-[#6B7280] text-xs">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </span>
-            <button id="clear-search" class="hidden absolute right-2.5 top-2 text-xs text-[#111827] hover:text-[#6E3F18] font-bold transition p-0.5 cursor-pointer">✕</button>
-          </div>
-
-          <!-- AI Filter Toggle -->
-          <button id="ai-only-btn" class="shrink-0 px-3.5 py-2 text-xs font-bold rounded-sm border border-[#C5BCB2] bg-white text-[#111827] hover:bg-[#F3EFE9] hover:border-[#6E3F18] active:scale-98 transition flex items-center gap-1.5 font-sans cursor-pointer shadow-2xs">
-            <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
-            <span>Enriched (<span id="ai-count">0</span>)</span>
-          </button>
-
+        <!-- Right: Search Input -->
+        <div class="relative w-full sm:w-80">
+          <input type="text" id="search-input" placeholder="Search title, place, language, text..." 
+            class="w-full bg-white border border-[#C5BCB2] rounded-sm pl-9 pr-8 py-2 text-xs font-semibold text-[#111827] placeholder-[#6B7280] focus:outline-none focus:ring-1 focus:ring-[#6E3F18] focus:border-[#6E3F18] transition font-sans shadow-2xs">
+          <span class="absolute left-3 top-2.5 text-[#6B7280] text-xs">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </span>
+          <button id="clear-search" class="hidden absolute right-2.5 top-2 text-xs text-[#111827] hover:text-[#6E3F18] font-bold transition p-0.5 cursor-pointer">✕</button>
         </div>
+
       </div>
 
       <!-- Category Filter Tabs -->
@@ -201,7 +191,6 @@
         <div class="flex items-center gap-2 flex-wrap">
           <span class="font-serif-title text-sm font-bold text-[#111827]">Showing <span id="filtered-count" class="font-bold text-[#6E3F18]">0</span> artifacts</span>
           <span id="active-filter-badge" class="hidden px-2.5 py-0.5 bg-[#F8F6F0] text-[#6E3F18] border border-[#DDD5C9] text-[11px] font-serif-title font-bold uppercase tracking-wider rounded-xs"></span>
-          <span id="active-ai-badge" class="hidden px-2.5 py-0.5 bg-emerald-100 text-emerald-950 border border-emerald-400 text-[11px] font-sans font-bold rounded-xs cursor-pointer hover:bg-emerald-200 transition">Enriched Only ✕</span>
         </div>
         
         <div class="flex items-center gap-1.5">
@@ -227,7 +216,7 @@
     </main>
   </div>
 
-  <!-- Streamlined Museum Dossier Modal -->
+  <!-- Streamlined Museum Dossier Modal (Pure Editorial Focus) -->
   <div id="detail-modal" class="fixed inset-0 bg-[#0F0E0D]/85 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-6 hidden">
     <div id="detail-modal-box" class="bg-white border border-[#DDD5C9] max-w-5xl w-full max-h-[92vh] flex flex-col md:flex-row overflow-hidden shadow-2xl rounded-sm">
       
@@ -241,20 +230,10 @@
       <div class="w-full md:w-[460px] p-6 sm:p-7 overflow-y-auto max-h-[50vh] md:max-h-[92vh] custom-scroll flex flex-col justify-between space-y-5 bg-white">
         <div class="space-y-4">
           
-          <!-- Header -->
+          <!-- Header (Clean Minimal Collection Masthead) -->
           <div class="border-b border-[#EFEAE2] pb-3.5 space-y-1.5">
-            <div class="flex items-center gap-2 flex-wrap text-xs">
-              <span id="modal-col-badge" class="font-serif-title font-bold uppercase tracking-wider text-[#6E3F18]">Collection</span>
-              <span id="modal-ai-indicator" class="hidden text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-950 border border-emerald-400 rounded-xs flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Transcribed
-              </span>
-            </div>
+            <span id="modal-col-badge" class="font-serif-title font-bold uppercase tracking-wider text-[#6E3F18] text-xs">Collection</span>
             <h3 id="modal-title" class="text-2xl sm:text-[26px] font-bold text-[#111827] font-serif-title leading-snug">Item Title</h3>
-          </div>
-
-          <!-- Summary Wrap (Hidden) -->
-          <div id="modal-summary-wrap" class="hidden">
-            <p id="modal-summary-text" class="text-xs sm:text-sm text-[#1F2937] leading-relaxed font-normal"></p>
           </div>
 
           <!-- Primary Reading Section: English Overview vs Original Script -->
@@ -319,7 +298,6 @@
     let allCollections = [];
     let activeCategory = 'all';
     let activeCollection = null;
-    let aiOnlyFilter = false;
     let searchQuery = '';
     let sortMode = 'name_asc';
     let currentPage = 1;
@@ -349,7 +327,6 @@
           const dbArtifacts = await artsRes.json();
           
           if (dbArtifacts.length > 0) {
-            // Only keep items that have valid preview images uploaded
             allItems = dbArtifacts.map(a => {
               const previewFile = a.preview_url ? a.preview_url.split('/').pop() : a.filename;
               const storageUrl = `${url}/storage/v1/object/public/previews/${previewFile}`;
@@ -375,13 +352,13 @@
               };
             });
 
-            // Dynamically recalculate collection counts based on the 1,000 active assets
+            // Dynamically recalculate collection counts based on active assets
             const colItemCounts = {};
             allItems.forEach(i => {
               colItemCounts[i.collection] = (colItemCounts[i.collection] || 0) + 1;
             });
 
-            // Filter out empty collections from the sidebar
+            // Filter out empty collections from sidebar
             allCollections = rawCollections
               .filter(c => (colItemCounts[c.name] || 0) > 0)
               .map(c => ({
@@ -390,7 +367,7 @@
               }));
 
             document.getElementById('stats-banner').textContent = 
-              `${allItems.length.toLocaleString()} artifacts live from Supabase PostgreSQL (${allCollections.length} active collections)`;
+              `${allItems.length.toLocaleString()} curated artifacts across ${allCollections.length} collections`;
             return true;
           }
         }
@@ -413,9 +390,6 @@
           document.getElementById('stats-banner').textContent = 
             `${allItems.length.toLocaleString()} catalogued artifacts across ${allCollections.length} collections (Local Cache)`;
         }
-        
-        const aiCount = allItems.filter(i => i.ai_content && (i.ai_content.transcribed_text || i.ai_content.english_translation)).length;
-        document.getElementById('ai-count').textContent = aiCount;
 
         renderCollectionList();
         applyFilters();
@@ -464,7 +438,6 @@
       filteredItems = allItems.filter(item => {
         if (activeCategory !== 'all' && item.category !== activeCategory) return false;
         if (activeCollection && item.collection !== activeCollection) return false;
-        if (aiOnlyFilter && (!item.ai_content || (!item.ai_content.transcribed_text && !item.ai_content.english_translation))) return false;
         
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
@@ -497,7 +470,6 @@
       }
 
       document.getElementById('filtered-count').textContent = filteredItems.length.toLocaleString();
-      document.getElementById('active-ai-badge').classList.toggle('hidden', !aiOnlyFilter);
       renderGrid();
     }
 
@@ -531,13 +503,10 @@
         card.className = 'animate-card-in group bg-white border border-[#DDD5C9] hover:border-[#6E3F18] rounded-xs overflow-hidden cursor-pointer transition duration-250 flex flex-col shadow-xs hover:shadow-md';
         
         const thumbSrc = item.thumbnail_url || item.preview_url || '';
-        const hasAI = item.ai_content && (item.ai_content.transcribed_text || item.ai_content.english_translation);
 
         card.innerHTML = `
           <div class="aspect-[4/3] bg-[#EFEAE2] overflow-hidden relative flex items-center justify-center border-b border-[#EFEAE2]">
             <img src="${thumbSrc}" alt="${item.title || item.filename}" loading="lazy" class="w-full h-full object-cover group-hover:scale-103 transition duration-500 ease-out bg-[#F8F6F0]">
-            
-            ${hasAI ? `<div class="absolute top-2 right-2"><span class="px-1.5 py-0.5 bg-emerald-950 text-white text-[9px] font-sans font-bold shadow-xs flex items-center gap-1 rounded-xs"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>AI ✓</span></div>` : ''}
           </div>
           <div class="p-3.5 flex-1 flex flex-col justify-between space-y-2">
             <div>
@@ -568,10 +537,6 @@
       img.src = item.preview_url || item.thumbnail_url || '';
       document.getElementById('modal-title').textContent = item.title || item.filename;
       document.getElementById('modal-col-badge').textContent = item.collection;
-
-      // AI Badge
-      const hasAI = ai && (ai.transcribed_text || ai.english_translation);
-      document.getElementById('modal-ai-indicator').classList.toggle('hidden', !hasAI);
 
       // Reading Section (English Overview vs Original Script)
       const transView = document.getElementById('modal-translation-view');
@@ -680,28 +645,6 @@
           renderCollectionList();
           applyFilters();
         });
-      });
-
-      const aiBtn = document.getElementById('ai-only-btn');
-      aiBtn.addEventListener('click', () => {
-        aiOnlyFilter = !aiOnlyFilter;
-        if (aiOnlyFilter) {
-          aiBtn.classList.remove('bg-white', 'text-[#111827]', 'hover:bg-[#F3EFE9]', 'border-[#C5BCB2]');
-          aiBtn.classList.add('bg-[#6E3F18]', 'text-white', 'hover:bg-[#573112]', 'border-[#6E3F18]', 'shadow-xs');
-        } else {
-          aiBtn.classList.remove('bg-[#6E3F18]', 'text-white', 'hover:bg-[#573112]', 'border-[#6E3F18]', 'shadow-xs');
-          aiBtn.classList.add('bg-white', 'text-[#111827]', 'hover:bg-[#F3EFE9]', 'border-[#C5BCB2]');
-        }
-        currentPage = 1;
-        applyFilters();
-      });
-
-      document.getElementById('active-ai-badge').addEventListener('click', () => {
-        aiOnlyFilter = false;
-        aiBtn.classList.remove('bg-[#6E3F18]', 'text-white', 'hover:bg-[#573112]', 'border-[#6E3F18]', 'shadow-xs');
-        aiBtn.classList.add('bg-white', 'text-[#111827]', 'hover:bg-[#F3EFE9]', 'border-[#C5BCB2]');
-        currentPage = 1;
-        applyFilters();
       });
 
       const searchInput = document.getElementById('search-input');
