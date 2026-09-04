@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Map & Manuscript Digital Archive</title>
   
+  <!-- Inline SVG Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+
   <!-- Curated Typography: Cormorant Garamond (Titles), Poppins (Body/UI), Amiri (Arabic/Ottoman) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -249,6 +252,11 @@
             <h3 id="modal-title" class="text-2xl sm:text-[26px] font-bold text-[#111827] font-serif-title leading-snug">Item Title</h3>
           </div>
 
+          <!-- Summary Wrap (Hidden) -->
+          <div id="modal-summary-wrap" class="hidden">
+            <p id="modal-summary-text" class="text-xs sm:text-sm text-[#1F2937] leading-relaxed font-normal"></p>
+          </div>
+
           <!-- Primary Reading Section: English Overview vs Original Script -->
           <div id="modal-text-section" class="space-y-2.5">
             
@@ -341,29 +349,29 @@
           const dbArtifacts = await artsRes.json();
           
           if (dbArtifacts.length > 0) {
-            allItems = dbArtifacts.map(a => ({
-              id: a.id,
-              filename: a.filename,
-              collection: a.collection,
-              category: a.category,
-              title: a.title,
-              date_depicted: a.date_depicted,
-              format: a.format,
-              file_size: a.file_size,
-              preview_url: a.preview_url.startsWith('http') 
-                ? a.preview_url 
-                : `${url}/storage/v1/object/public/previews/${a.filename}`,
-              thumbnail_url: a.preview_url.startsWith('http') 
-                ? a.preview_url 
-                : `${url}/storage/v1/object/public/previews/${a.filename}`,
-              ai_content: a.ai_content || {
-                document_type: a.title,
-                language: a.language,
-                key_entities: a.entities || [],
-                transcribed_text: a.script_text || '',
-                english_translation: a.overview || ''
-              }
-            }));
+            allItems = dbArtifacts.map(a => {
+              // Construct public Supabase Storage CDN URL for image
+              const storageUrl = `${url}/storage/v1/object/public/previews/${a.filename}`;
+              return {
+                id: a.id,
+                filename: a.filename,
+                collection: a.collection,
+                category: a.category,
+                title: a.title,
+                date_depicted: a.date_depicted,
+                format: a.format,
+                file_size: a.file_size,
+                preview_url: a.preview_url && a.preview_url.startsWith('http') ? a.preview_url : storageUrl,
+                thumbnail_url: a.thumbnail_url && a.thumbnail_url.startsWith('http') ? a.thumbnail_url : storageUrl,
+                ai_content: a.ai_content || {
+                  document_type: a.title,
+                  language: a.language,
+                  key_entities: a.entities || [],
+                  transcribed_text: a.script_text || '',
+                  english_translation: a.overview || ''
+                }
+              };
+            });
 
             document.getElementById('stats-banner').textContent = 
               `${allItems.length.toLocaleString()} artifacts live from Supabase PostgreSQL (${allCollections.length} collections)`;
