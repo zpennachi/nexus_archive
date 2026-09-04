@@ -41,9 +41,14 @@
     }
   </script>
 
-  <!-- Local Bundles -->
-  <script src="collections.js"></script>
-  <script src="catalog.js"></script>
+  <!-- Supabase Client Config -->
+  <script>
+    // Set your Supabase credentials here for direct cloud fetching
+    window.SUPABASE_CONFIG = {
+      url: localStorage.getItem('SUPABASE_URL') || '',
+      anonKey: localStorage.getItem('SUPABASE_ANON_KEY') || ''
+    };
+  </script>
 
   <style>
     body {
@@ -127,15 +132,15 @@
             Map & Manuscript Digital Archive
           </h1>
           <p class="text-xs sm:text-sm text-[#6E3F18] font-serif-title font-semibold mt-0.5 tracking-wide" id="stats-banner">
-            Curated historical cartography and manuscript records
+            Connecting to Supabase cloud archive...
           </p>
         </div>
 
-        <!-- Right: Search & AI Filter -->
-        <div class="flex items-center gap-3 w-full lg:w-auto">
+        <!-- Right: Search, AI Filter & Supabase Connection -->
+        <div class="flex items-center gap-2.5 w-full lg:w-auto flex-wrap sm:flex-nowrap">
           
           <!-- Global Search Input -->
-          <div class="relative flex-1 lg:w-80">
+          <div class="relative flex-1 lg:w-72">
             <input type="text" id="search-input" placeholder="Search title, place, language, text..." 
               class="w-full bg-white border border-[#C5BCB2] rounded-sm pl-9 pr-8 py-2 text-xs font-semibold text-[#111827] placeholder-[#6B7280] focus:outline-none focus:ring-1 focus:ring-[#6E3F18] focus:border-[#6E3F18] transition font-sans shadow-2xs">
             <span class="absolute left-3 top-2.5 text-[#6B7280] text-xs">
@@ -145,9 +150,14 @@
           </div>
 
           <!-- AI Filter Toggle -->
-          <button id="ai-only-btn" class="shrink-0 px-3.5 py-2 text-xs font-bold rounded-sm border border-[#C5BCB2] bg-white text-[#111827] hover:bg-[#F3EFE9] hover:border-[#6E3F18] active:scale-98 transition flex items-center gap-1.5 font-sans cursor-pointer shadow-2xs">
+          <button id="ai-only-btn" class="shrink-0 px-3 py-2 text-xs font-bold rounded-sm border border-[#C5BCB2] bg-white text-[#111827] hover:bg-[#F3EFE9] hover:border-[#6E3F18] active:scale-98 transition flex items-center gap-1.5 font-sans cursor-pointer shadow-2xs">
             <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
             <span>Enriched (<span id="ai-count">0</span>)</span>
+          </button>
+
+          <!-- Supabase Config Button -->
+          <button id="config-btn" title="Configure Supabase Cloud URL & Key" class="shrink-0 px-2.5 py-2 text-xs font-bold rounded-sm border border-[#C5BCB2] bg-white text-[#111827] hover:bg-[#F3EFE9] active:scale-98 transition font-sans cursor-pointer shadow-2xs flex items-center gap-1">
+            <span>⚙</span>
           </button>
 
         </div>
@@ -181,7 +191,7 @@
         </div>
         
         <ul class="space-y-1" id="collections-list">
-          <!-- Populated by JS -->
+          <!-- Populated from Supabase -->
         </ul>
       </div>
     </aside>
@@ -208,7 +218,7 @@
 
       <!-- Placards Grid -->
       <div id="items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Rendered cards -->
+        <!-- Rendered from Supabase -->
       </div>
 
       <!-- Pagination -->
@@ -220,7 +230,7 @@
     </main>
   </div>
 
-  <!-- Streamlined Museum Dossier Modal (Clean Header without Cluttered Dates) -->
+  <!-- Streamlined Museum Dossier Modal -->
   <div id="detail-modal" class="fixed inset-0 bg-[#0F0E0D]/85 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-6 hidden">
     <div id="detail-modal-box" class="bg-white border border-[#DDD5C9] max-w-5xl w-full max-h-[92vh] flex flex-col md:flex-row overflow-hidden shadow-2xl rounded-sm">
       
@@ -234,7 +244,7 @@
       <div class="w-full md:w-[460px] p-6 sm:p-7 overflow-y-auto max-h-[50vh] md:max-h-[92vh] custom-scroll flex flex-col justify-between space-y-5 bg-white">
         <div class="space-y-4">
           
-          <!-- Header (Clean Minimal Ribbon: Collection • Transcribed) -->
+          <!-- Header -->
           <div class="border-b border-[#EFEAE2] pb-3.5 space-y-1.5">
             <div class="flex items-center gap-2 flex-wrap text-xs">
               <span id="modal-col-badge" class="font-serif-title font-bold uppercase tracking-wider text-[#6E3F18]">Collection</span>
@@ -243,11 +253,6 @@
               </span>
             </div>
             <h3 id="modal-title" class="text-2xl sm:text-[26px] font-bold text-[#111827] font-serif-title leading-snug">Item Title</h3>
-          </div>
-
-          <!-- Summary Wrap (Hidden) -->
-          <div id="modal-summary-wrap" class="hidden">
-            <p id="modal-summary-text" class="text-xs sm:text-sm text-[#1F2937] leading-relaxed font-normal"></p>
           </div>
 
           <!-- Primary Reading Section: English Overview vs Original Script -->
@@ -321,31 +326,84 @@
     let filteredItems = [];
     let activeModalTab = 'trans';
 
+    // Direct Supabase REST Fetcher
+    async function fetchFromSupabase() {
+      const url = window.SUPABASE_CONFIG.url;
+      const key = window.SUPABASE_CONFIG.anonKey;
+
+      if (url && key) {
+        const headers = {
+          "apikey": key,
+          "Authorization": `Bearer ${key}`
+        };
+
+        const [colsRes, artsRes] = await Promise.all([
+          fetch(`${url}/rest/v1/collections?select=*&order=name.asc`, { headers }),
+          fetch(`${url}/rest/v1/artifacts?select=*&order=title.asc&limit=1000`, { headers })
+        ]);
+
+        if (colsRes.ok && artsRes.ok) {
+          allCollections = await colsRes.json();
+          const dbArtifacts = await artsRes.json();
+          
+          // Map database structure to UI item structure
+          allItems = dbArtifacts.map(a => ({
+            id: a.id,
+            filename: a.filename,
+            collection: a.collection,
+            category: a.category,
+            title: a.title,
+            date_depicted: a.date_depicted,
+            format: a.format,
+            file_size: a.file_size,
+            preview_url: a.preview_url.startsWith('http') 
+              ? a.preview_url 
+              : `${url}/storage/v1/object/public/previews/${a.filename}`,
+            thumbnail_url: a.preview_url.startsWith('http') 
+              ? a.preview_url 
+              : `${url}/storage/v1/object/public/previews/${a.filename}`,
+            ai_content: a.ai_content || {
+              document_type: a.title,
+              language: a.language,
+              key_entities: a.entities || [],
+              transcribed_text: a.script_text || '',
+              english_translation: a.overview || ''
+            }
+          }));
+
+          document.getElementById('stats-banner').textContent = 
+            `${allItems.length.toLocaleString()} artifacts live from Supabase PostgreSQL (${allCollections.length} collections)`;
+          return true;
+        }
+      }
+      return false;
+    }
+
     async function init() {
       try {
-        if (window.CATALOG_DATA && window.COLLECTIONS_DATA) {
-          allItems = window.CATALOG_DATA;
-          allCollections = window.COLLECTIONS_DATA;
-        } else {
+        const connected = await fetchFromSupabase();
+        
+        if (!connected) {
+          // Fallback to local JSON files if Supabase is not configured yet
           const [itemsRes, colsRes] = await Promise.all([
             fetch('catalog.json'),
             fetch('collections.json')
           ]);
           allItems = await itemsRes.json();
           allCollections = await colsRes.json();
+
+          document.getElementById('stats-banner').textContent = 
+            `${allItems.length.toLocaleString()} catalogued artifacts across ${allCollections.length} collections (Local Cache)`;
         }
         
         const aiCount = allItems.filter(i => i.ai_content && (i.ai_content.transcribed_text || i.ai_content.english_translation)).length;
         document.getElementById('ai-count').textContent = aiCount;
 
-        document.getElementById('stats-banner').textContent = 
-          `${allItems.length.toLocaleString()} catalogued artifacts across ${allCollections.length} research collections`;
-        
         renderCollectionList();
         applyFilters();
         setupEvents();
       } catch (err) {
-        document.getElementById('stats-banner').textContent = 'Error loading catalog: ' + err.message;
+        document.getElementById('stats-banner').textContent = 'Error loading archive: ' + err.message;
       }
     }
 
@@ -459,7 +517,7 @@
 
         card.innerHTML = `
           <div class="aspect-[4/3] bg-[#F8F6F0] overflow-hidden relative flex items-center justify-center border-b border-[#EFEAE2]">
-            ${thumbSrc ? `<img src="${thumbSrc}" alt="${item.title || item.filename}" loading="lazy" class="w-full h-full object-cover group-hover:scale-103 transition duration-500 ease-out">` : '<div class="w-full h-full flex items-center justify-center text-[#111827] text-xl font-sans">📄</div>'}
+            ${thumbSrc ? `<img src="${thumbSrc}" alt="${item.title || item.filename}" loading="lazy" class="w-full h-full object-cover group-hover:scale-103 transition duration-500 ease-out" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\'><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'20\\'>📄</text></svg>'">` : '<div class="w-full h-full flex items-center justify-center text-[#111827] text-xl font-sans">📄</div>'}
             
             ${hasAI ? `<div class="absolute top-2 right-2"><span class="px-1.5 py-0.5 bg-emerald-950 text-white text-[9px] font-sans font-bold shadow-xs flex items-center gap-1 rounded-xs"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>AI ✓</span></div>` : ''}
           </div>
@@ -626,6 +684,25 @@
         aiBtn.classList.add('bg-white', 'text-[#111827]', 'hover:bg-[#F3EFE9]', 'border-[#C5BCB2]');
         currentPage = 1;
         applyFilters();
+      });
+
+      // Supabase Settings Modal Prompt
+      document.getElementById('config-btn').addEventListener('click', () => {
+        const currentUrl = localStorage.getItem('SUPABASE_URL') || '';
+        const currentKey = localStorage.getItem('SUPABASE_ANON_KEY') || '';
+        
+        const newUrl = prompt('Enter your Supabase Project URL (e.g. https://xyz.supabase.co):', currentUrl);
+        if (newUrl !== null) {
+          const newKey = prompt('Enter your Supabase Anon Public Key:', currentKey);
+          if (newKey !== null) {
+            localStorage.setItem('SUPABASE_URL', newUrl.trim());
+            localStorage.setItem('SUPABASE_ANON_KEY', newKey.trim());
+            window.SUPABASE_CONFIG.url = newUrl.trim();
+            window.SUPABASE_CONFIG.anonKey = newKey.trim();
+            alert('Supabase credentials saved! Reloading live from Supabase...');
+            location.reload();
+          }
+        }
       });
 
       const searchInput = document.getElementById('search-input');
