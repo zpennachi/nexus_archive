@@ -1,0 +1,188 @@
+{
+  "stats": {
+    "processed": 1329,
+    "failed": 22,
+    "errors": [
+      {
+        "file": "Bible Maps of the Middle East\\Bible Maps\\103. _A Map of Syria_ cited in Wasfi \u2018Inbitawi and Sa\u2018id Sabbagh, Filastin wa-al-Bilad al-\u2018Arabiyya wa-Sa\u2019ir al-Buldan al-Sharq al-\u2018Adna wa-Hawd al-Bahr al-Mutawassat (Jaffa- Maktabat al-Tahir Ikhwan, 1946), 212.png",
+        "error": "File not found"
+      },
+      {
+        "file": "Bible Maps of the Middle East\\Bible Maps\\1947, 1. \u201cThe Ancient Inhabitants of Syria and Palestine\u201d (al-Sukkan al-Aqdimun fi Suriya wa Filastin), cited In _Isa al-Safri, al-Wu_ud al-Thulatha fi Tarikh Filastin, 1947.png",
+        "error": "[Errno 2] No such file or directory: 'c:\\\\Users\\\\hi\\\\Downloads\\\\maps\\\\Maps_Web\\\\thumbnails\\\\Bible_Maps_of_the_Middle_East__Bible_Maps__1947__1.__The_Ancient_Inhabitants_of_Syria_and_Palestine___al-Sukkan_al-Aqdimun_fi_Suriya_wa_Filastin___cited_In__Isa_al-Safri__al-Wu_ud_al-Thulatha_fi_Tarikh_Filastin__1947.webp'"
+      },
+      {
+        "file": "Bible Maps of the Middle East\\Bible Maps\\63. _The Exodus- Journeys of the Chlidren of Israel from Egypt to the Land of Canaan,_ cited in n.a., Atlas al-Kitab al-Muqaddas (Edinburgh and London- W. _ A.K. Johnston, n.d.), 3.png",
+        "error": "File not found"
+      },
+      {
+        "file": "Egypt\\Suez Bay, Egypt 1856 (351K) _Karte der Bai von Sues_ From Mittheilungen aus Justus Perthes_ Geographischer Anstalt uber Wichtige Neue Erforschungen auf dem Gesammtgebiete der Geographie von Dr. A. Petermann. Volume 7, 1861..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Iran\\meshed_scale Meshed [Mashad] Area 1942  Iran  Surveyor-General of India 1909 and Revised to 1941. Published by the War Office, 1942 and reprinted by the U.S. Army Map Service October 1942. map key and scale (146K).jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Iran\\Persia, Afghanistan and Beluchistan 1902 (14.8MB) _Persia, Afghanistan and Beluchistan Showing Lord Ronaldshay_s Route_ from Sport and Politics Under an Eastern Sky by The Earl of Ronaldshay, William Blackwood and Sons, 1902..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Iran\\Tabriz Area 1943 (244K) Portion of sheet J-38 K Tabriz. Original scale 1-253,440 Compiled and Reproduced by India Field Survey Company, May 1943. Published by the U.S. Army Map Service, August 1943. map key and scale (149K).jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Iran\\tabriz_scale Tabriz Area 1943 (244K) Portion of sheet J-38 K Tabriz. Original scale 1-253,440 Compiled and Reproduced by India Field Survey Company, May 1943. Published by the U.S. Army Map Service, August 1943. map key and scale (149K).jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Iran\\Turkey and Persia 1843 (3.5MB) _Portions of Turkey and Persia_ from A Residence of Eight Years in Persia, Among the Nestorians_ with Notices of the Muhammedans by Rev. Justin Perkins. Allen, Morrill and Wardwell. Andover, 1843..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Iraq\\Baghdad 1849 The River Euphrates From Hit to the Kuthah River and The River Tigris from Sammara to the Abu Hitti Canal..._ from Maps volume, sheet VII of The Expedition for the Survey of the Rivers Euphrates and Tigris 1850.jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\104-1 _Palestine and Transjordan,_ cited in Sa\u2018id al-Sabbagh, al-Jughrafiya al-Ibtida\u2019iyya- Li-Ahdath Suriya wa-Lubnan  wa-Filastin wa al-Sharq al-\u2018Arabi (Sidon- Matba\u2018at al-\u2018Irfan, 1937[1927]), 89.jpg",
+        "error": "[Errno 2] No such file or directory: 'c:\\\\Users\\\\hi\\\\Downloads\\\\maps\\\\Maps_Web\\\\thumbnails\\\\Palestine_and_Syria__104-1__Palestine_and_Transjordan___cited_in_Sa_id_al-Sabbagh__al-Jughrafiya_al-Ibtida_iyya-_Li-Ahdath_Suriya_wa-Lubnan__wa-Filastin_wa_al-Sharq_al-_Arabi__Sidon-_Matba_at_al-_Irfan__1937_1927____89.webp'"
+      },
+      {
+        "file": "Palestine and Syria\\jerusalem_david_1000bc_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\jerusalem_herodian_period_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\jerusalem_later_monarchy_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\jerusalem_macabees_168bc_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\jerusalem_northern_walls_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\jerusalem_solomon_970bc_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\Palestine, Ancient Palaestina From _A Classical Atlas, to Illustrate Ancient Geography_ Comprised in Twenty-Five maps, Showing the Various Divisions of the World as Known to the Ancients  by Alexander G. Findlay, F.R.G.S. 1849..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Palestine and Syria\\Red Sea 1860 _Das Rothe Meer und die Wichtigsten Hafen Seiner Westhalfte_ Justus Perthes_ Geographischer Anstalt uber Wichtige Neue Erforschungen auf dem Gesammtgebiete der Geographie von Dr. A. Petermann. Volume 6, 1860..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Turkey\\Other\\Turkey and Persia 1843 (3.5MB) _Portions of Turkey and Persia_ from A Residence of Eight Years in Persia, Among the Nestorians_ with Notices of the Muhammedans by Rev. Justin Perkins. Allen, Morrill and Wardwell. Andover, 1843..jpeg",
+        "error": "File not found"
+      },
+      {
+        "file": "Turkmenistan\\Turkomania 1887 (154K) _Map of South Western Turkomania_ from the Scottish Geographical Magazine. Published by the Scottish Geographical Society and edited by Arthur Silva White. Volume III, 1887. .jpeg",
+        "error": "[Errno 2] No such file or directory: 'c:\\\\Users\\\\hi\\\\Downloads\\\\maps\\\\Maps_Web\\\\thumbnails\\\\Turkmenistan__Turkomania_1887__154K___Map_of_South_Western_Turkomania__from_the_Scottish_Geographical_Magazine._Published_by_the_Scottish_Geographical_Society_and_edited_by_Arthur_Silva_White._Volume_III__1887._.webp'"
+      },
+      {
+        "file": "Yemen\\socotra_1886 Socotra 1886 (118K) _Island of Socotra_ from the Scottish Geographical Magazine. Published by the Scottish Geographical Society and edited by Hugh A. Webster and Arthur Silva White. Volume II, 1886..jpeg",
+        "error": "File not found"
+      }
+    ],
+    "thumb_bytes": 23252296,
+    "preview_bytes": 286282726
+  },
+  "errors": [
+    {
+      "file": "Bible Maps of the Middle East\\Bible Maps\\103. _A Map of Syria_ cited in Wasfi \u2018Inbitawi and Sa\u2018id Sabbagh, Filastin wa-al-Bilad al-\u2018Arabiyya wa-Sa\u2019ir al-Buldan al-Sharq al-\u2018Adna wa-Hawd al-Bahr al-Mutawassat (Jaffa- Maktabat al-Tahir Ikhwan, 1946), 212.png",
+      "error": "File not found"
+    },
+    {
+      "file": "Bible Maps of the Middle East\\Bible Maps\\1947, 1. \u201cThe Ancient Inhabitants of Syria and Palestine\u201d (al-Sukkan al-Aqdimun fi Suriya wa Filastin), cited In _Isa al-Safri, al-Wu_ud al-Thulatha fi Tarikh Filastin, 1947.png",
+      "error": "[Errno 2] No such file or directory: 'c:\\\\Users\\\\hi\\\\Downloads\\\\maps\\\\Maps_Web\\\\thumbnails\\\\Bible_Maps_of_the_Middle_East__Bible_Maps__1947__1.__The_Ancient_Inhabitants_of_Syria_and_Palestine___al-Sukkan_al-Aqdimun_fi_Suriya_wa_Filastin___cited_In__Isa_al-Safri__al-Wu_ud_al-Thulatha_fi_Tarikh_Filastin__1947.webp'"
+    },
+    {
+      "file": "Bible Maps of the Middle East\\Bible Maps\\63. _The Exodus- Journeys of the Chlidren of Israel from Egypt to the Land of Canaan,_ cited in n.a., Atlas al-Kitab al-Muqaddas (Edinburgh and London- W. _ A.K. Johnston, n.d.), 3.png",
+      "error": "File not found"
+    },
+    {
+      "file": "Egypt\\Suez Bay, Egypt 1856 (351K) _Karte der Bai von Sues_ From Mittheilungen aus Justus Perthes_ Geographischer Anstalt uber Wichtige Neue Erforschungen auf dem Gesammtgebiete der Geographie von Dr. A. Petermann. Volume 7, 1861..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Iran\\meshed_scale Meshed [Mashad] Area 1942  Iran  Surveyor-General of India 1909 and Revised to 1941. Published by the War Office, 1942 and reprinted by the U.S. Army Map Service October 1942. map key and scale (146K).jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Iran\\Persia, Afghanistan and Beluchistan 1902 (14.8MB) _Persia, Afghanistan and Beluchistan Showing Lord Ronaldshay_s Route_ from Sport and Politics Under an Eastern Sky by The Earl of Ronaldshay, William Blackwood and Sons, 1902..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Iran\\Tabriz Area 1943 (244K) Portion of sheet J-38 K Tabriz. Original scale 1-253,440 Compiled and Reproduced by India Field Survey Company, May 1943. Published by the U.S. Army Map Service, August 1943. map key and scale (149K).jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Iran\\tabriz_scale Tabriz Area 1943 (244K) Portion of sheet J-38 K Tabriz. Original scale 1-253,440 Compiled and Reproduced by India Field Survey Company, May 1943. Published by the U.S. Army Map Service, August 1943. map key and scale (149K).jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Iran\\Turkey and Persia 1843 (3.5MB) _Portions of Turkey and Persia_ from A Residence of Eight Years in Persia, Among the Nestorians_ with Notices of the Muhammedans by Rev. Justin Perkins. Allen, Morrill and Wardwell. Andover, 1843..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Iraq\\Baghdad 1849 The River Euphrates From Hit to the Kuthah River and The River Tigris from Sammara to the Abu Hitti Canal..._ from Maps volume, sheet VII of The Expedition for the Survey of the Rivers Euphrates and Tigris 1850.jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\104-1 _Palestine and Transjordan,_ cited in Sa\u2018id al-Sabbagh, al-Jughrafiya al-Ibtida\u2019iyya- Li-Ahdath Suriya wa-Lubnan  wa-Filastin wa al-Sharq al-\u2018Arabi (Sidon- Matba\u2018at al-\u2018Irfan, 1937[1927]), 89.jpg",
+      "error": "[Errno 2] No such file or directory: 'c:\\\\Users\\\\hi\\\\Downloads\\\\maps\\\\Maps_Web\\\\thumbnails\\\\Palestine_and_Syria__104-1__Palestine_and_Transjordan___cited_in_Sa_id_al-Sabbagh__al-Jughrafiya_al-Ibtida_iyya-_Li-Ahdath_Suriya_wa-Lubnan__wa-Filastin_wa_al-Sharq_al-_Arabi__Sidon-_Matba_at_al-_Irfan__1937_1927____89.webp'"
+    },
+    {
+      "file": "Palestine and Syria\\jerusalem_david_1000bc_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\jerusalem_herodian_period_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\jerusalem_later_monarchy_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\jerusalem_macabees_168bc_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\jerusalem_northern_walls_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\jerusalem_solomon_970bc_From Atlas of the Historical Geography of the Holy Land. Designed and edited by George Adam Smith and prepared under the direction of J.G. Bartholomew. London, Hodder and Stoughton, 1915..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\Palestine, Ancient Palaestina From _A Classical Atlas, to Illustrate Ancient Geography_ Comprised in Twenty-Five maps, Showing the Various Divisions of the World as Known to the Ancients  by Alexander G. Findlay, F.R.G.S. 1849..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Palestine and Syria\\Red Sea 1860 _Das Rothe Meer und die Wichtigsten Hafen Seiner Westhalfte_ Justus Perthes_ Geographischer Anstalt uber Wichtige Neue Erforschungen auf dem Gesammtgebiete der Geographie von Dr. A. Petermann. Volume 6, 1860..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Turkey\\Other\\Turkey and Persia 1843 (3.5MB) _Portions of Turkey and Persia_ from A Residence of Eight Years in Persia, Among the Nestorians_ with Notices of the Muhammedans by Rev. Justin Perkins. Allen, Morrill and Wardwell. Andover, 1843..jpeg",
+      "error": "File not found"
+    },
+    {
+      "file": "Turkmenistan\\Turkomania 1887 (154K) _Map of South Western Turkomania_ from the Scottish Geographical Magazine. Published by the Scottish Geographical Society and edited by Arthur Silva White. Volume III, 1887. .jpeg",
+      "error": "[Errno 2] No such file or directory: 'c:\\\\Users\\\\hi\\\\Downloads\\\\maps\\\\Maps_Web\\\\thumbnails\\\\Turkmenistan__Turkomania_1887__154K___Map_of_South_Western_Turkomania__from_the_Scottish_Geographical_Magazine._Published_by_the_Scottish_Geographical_Society_and_edited_by_Arthur_Silva_White._Volume_III__1887._.webp'"
+    },
+    {
+      "file": "Yemen\\socotra_1886 Socotra 1886 (118K) _Island of Socotra_ from the Scottish Geographical Magazine. Published by the Scottish Geographical Society and edited by Hugh A. Webster and Arthur Silva White. Volume II, 1886..jpeg",
+      "error": "File not found"
+    }
+  ]
+}

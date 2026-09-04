@@ -1,0 +1,25 @@
+# Environment & Keys
+.env
+.env.local
+*.key
+*.pem
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Large local media caches (hosted on Supabase Storage)
+previews/
+thumbnails/
+*.tmp
+*.log
+
+# OS & Editor Metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

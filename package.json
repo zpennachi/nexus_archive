@@ -1,0 +1,13 @@
+{
+  "name": "map-manuscript-digital-archive",
+  "version": "1.0.0",
+  "description": "Digital Archive of Historical Cartography, Ottoman Manuscripts, and Archival Records",
+  "main": "index.html",
+  "scripts": {
+    "sync:supabase": "python ../image_processor/sync_to_supabase.py",
+    "enrich": "python ../image_processor/gemini_vision_enricher.py"
+  },
+  "keywords": ["archive", "cartography", "manuscripts", "ottoman", "history", "museum"],
+  "author": "",
+  "license": "MIT"
+}
